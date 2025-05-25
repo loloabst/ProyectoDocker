@@ -3,7 +3,7 @@
 1. Clona el repositorio:
    ```bash
    git clone https://github.com/loloabst/ProyectoDocker.git
-   cd ProyectoDocker/proyecto
+   cd ProyectoDocker/proyectos
    ```
 
 2. Compila la app (genera el JAR):
