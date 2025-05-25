@@ -37,15 +37,6 @@ public class ManejoGlobalExcepciones {
         return new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
     }
 
-    // Maneja violaciones de restricciones en parámetros validados (por ejemplo, @NotNull, @Size)
-    @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<HashMap<String, String>> manejoDeConstraintViolation(ConstraintViolationException ex) {
-        HashMap<String, String> respuesta = new HashMap<>();
-        respuesta.put("mensaje", ex.getMessage());
-        respuesta.put("timestamp", LocalDateTime.now().toString());
-        return new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
-    }
-
     // Maneja errores de validación cuando se usa @Valid en un metodo y hay errores en el binding de datos
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<HashMap<String, String>> manejoDeValidacion(MethodArgumentNotValidException ex) {
@@ -53,24 +44,6 @@ public class ManejoGlobalExcepciones {
         respuesta.put("mensaje", ex.getBindingResult().getAllErrors().get(0).getDefaultMessage());
         respuesta.put("timestamp", LocalDateTime.now().toString());
         return new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
-    }
-
-    // Maneja errores cuando falta un parámetro obligatorio en la petición HTTP
-    @ExceptionHandler(MissingServletRequestParameterException.class)
-    public ResponseEntity<HashMap<String, String>> faltaParametro(MissingServletRequestParameterException ex) {
-        HashMap<String, String> respuesta = new HashMap<>();
-        respuesta.put("mensaje", "Falta el parámetro requerido: " + ex.getParameterName());
-        respuesta.put("timestamp", LocalDateTime.now().toString());
-        return new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
-    }
-
-    // Maneja errores cuando se utiliza un metodo HTTP no soportado por el endpoint
-    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    public ResponseEntity<HashMap<String, String>> metodoNoPermitido(HttpRequestMethodNotSupportedException ex) {
-        HashMap<String, String> respuesta = new HashMap<>();
-        respuesta.put("mensaje", "Método HTTP no soportado: " + ex.getMethod());
-        respuesta.put("timestamp", LocalDateTime.now().toString());
-        return new ResponseEntity<>(respuesta, HttpStatus.METHOD_NOT_ALLOWED);
     }
 
     // Captura cualquier excepción no manejada previamente (error inesperado)

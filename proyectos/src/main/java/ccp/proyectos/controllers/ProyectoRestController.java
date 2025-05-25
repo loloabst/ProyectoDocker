@@ -1,5 +1,6 @@
 package ccp.proyectos.controllers;
 
+import ccp.proyectos.dtos.ProyectoParcialDTO;
 import ccp.proyectos.entities.Proyecto;
 import ccp.proyectos.services.ProyectoServicio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,22 +43,21 @@ public class ProyectoRestController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Proyecto> actualizaParcial(@PathVariable Long id, @RequestBody  Proyecto proyecto) {
+    public ResponseEntity<Proyecto> actualizaParcial(@PathVariable Long id, @RequestBody ProyectoParcialDTO dto) {
         Proyecto existente = proyectoServicio.buscarProyectoPorId(id).orElse(null);
-        if (existente == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        if (existente == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
-        if (proyecto.getNombre() != null) existente.setNombre(proyecto.getNombre());
-        if (proyecto.getDescripcion() != null) existente.setDescripcion(proyecto.getDescripcion());
-        if (proyecto.getFechaInicio() != null) existente.setFechaInicio(proyecto.getFechaInicio());
-        if (proyecto.getEstado() != null) existente.setEstado(proyecto.getEstado());
-        if (proyecto.getResponsable() != null) existente.setResponsable(proyecto.getResponsable());
-        if (proyecto.getPresupuesto() != null) existente.setPresupuesto(proyecto.getPresupuesto());
+        if (dto.getNombre() != null) existente.setNombre(dto.getNombre());
+        if (dto.getDescripcion() != null) existente.setDescripcion(dto.getDescripcion());
+        if (dto.getFechaInicio() != null) existente.setFechaInicio(dto.getFechaInicio());
+        if (dto.getEstado() != null) existente.setEstado(dto.getEstado());
+        if (dto.getResponsable() != null) existente.setResponsable(dto.getResponsable());
+        if (dto.getPresupuesto() != null) existente.setPresupuesto(dto.getPresupuesto());
 
         Proyecto actualizado = proyectoServicio.actualizarProyecto(existente);
         return new ResponseEntity<>(actualizado, HttpStatus.OK);
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<Proyecto> editar(@PathVariable Long id, @RequestBody @Valid Proyecto proyecto) {
         proyecto.setId(id);
