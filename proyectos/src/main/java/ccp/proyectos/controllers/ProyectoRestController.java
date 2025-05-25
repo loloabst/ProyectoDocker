@@ -42,7 +42,7 @@ public class ProyectoRestController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Proyecto> actualizaParcial(@PathVariable Long id, @RequestBody @Valid Proyecto proyecto) {
+    public ResponseEntity<Proyecto> actualizaParcial(@PathVariable Long id, @RequestBody  Proyecto proyecto) {
         Proyecto existente = proyectoServicio.buscarProyectoPorId(id).orElse(null);
         if (existente == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
