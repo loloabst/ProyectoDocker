@@ -18,7 +18,7 @@
    ```
 
 4. Accede a la aplicación:
-   - API REST base: `http://localhost:8081/api/v1/proyectos`
+   - API REST base: `http://localhost:8081/api/v1/proyectos/`
 
 ---
 
