@@ -3,21 +3,15 @@
 1. Clona el repositorio:
    ```bash
    git clone https://github.com/loloabst/ProyectoDocker.git
-   cd ProyectoDocker/proyectos
+   cd ProyectoDocker
    ```
 
-2. Compila la app (genera el JAR):
+2. Levanta los contenedores:
    ```bash
-   mvn clean package 
-   ```
-
-3. Levanta los contenedores:
-   ```bash
-   cd ..
    docker compose up 
    ```
 
-4. Accede a la aplicación:
+3. Accede a la aplicación:
    - API REST base: `http://localhost:8081/api/v1/proyectos/`
 
 ---
